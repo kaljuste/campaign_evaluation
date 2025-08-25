@@ -1,4 +1,4 @@
-# Marketing Insights Pretotype (n8n · Open-Source · Email + Chat)
+# Marketing Insights Pretotype (Evaluation · Email + Chat) {Open-Source · docker · n8n · postgres · redis · JS}
 
 Automatically turn campaign dashboard data into **actionable insights**—delivered as an email report and available via a **chat assistant** for follow-up Q&A.
 
