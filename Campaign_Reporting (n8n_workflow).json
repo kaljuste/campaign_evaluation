@@ -1,0 +1,1027 @@
+{
+  "name": "Campaign_Reporting",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Campaign Evaluation Tool [Pretotype] - Introduction",
+        "formDescription": "=This is a pretotype application created for a use case.\n\nYou are the marketer of Vydura for Europe. \n\n1. You can generate a monthly report per email about the status of campaigns with recommended actions\n[schduled monthly sending is also possible, not implememnted]\n\n2. Or you can chat with a specialist AI Chatbot about the report and recommended actions.\n\nMock data used:\nhttps://nocodb.rationaleyes.ai/dashboard/#/nc/view/fe352a7a-160b-4580-9e24-b555b8a2da40\n- covers one imaginary campaign 'VYDURA_1'\n- contains data for Switzerland and Austria for June, July, Aug 2025\n- targeted HCP groups: cardiologists, neurologists\n- channels: RTE, Newsletters\n- for RTE 3 different messages used - M1_Efficacy, M2_Safety, M3_Access\n- simulates 3 sending time windows within a day\n\nDescription and all details for the pretotype:\nhttps://github.com/kaljuste/campaign_evaluation/tree/main",
+        "options": {
+          "appendAttribution": false,
+          "buttonLabel": "START",
+          "path": "pfizer_usecase"
+        }
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.2,
+      "position": [
+        -1184,
+        -144
+      ],
+      "id": "de9d374c-2380-480a-8f4a-95413def8186",
+      "name": "On form submission",
+      "webhookId": "0baaeaa7-b39b-4333-a3c8-eea30d800bd9"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "placeholder": "enter your name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "fieldType": "email",
+              "placeholder": "enter your email address",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "formTitle": "Campaign Evaluation Tool [Prototype]",
+          "formDescription": "Please enter your name and email address where you want to receive the the report to.\n\nThis is just a technical step built into the pretotype to simulate login and user authentication.",
+          "buttonLabel": "Next"
+        }
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        -992,
+        -144
+      ],
+      "id": "82edf156-596c-4bcf-854d-662b10c99118",
+      "name": "Form",
+      "webhookId": "49f285b7-3fa4-4ef5-b945-93b44ec86c82"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Campaign",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "VYDURA_1"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Country",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Austria"
+                  },
+                  {
+                    "option": "Switzerland"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Period",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "2025-06"
+                  },
+                  {
+                    "option": "2025-07"
+                  },
+                  {
+                    "option": "2025-08"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "formTitle": "Campaign Evaluation Tool [Prototype]",
+          "formDescription": "Choose campaign, report period and country to determine what report to generate or discuss.\n\nFor simplification, currently only full calendar months reports are represented.",
+          "buttonLabel": "Submit",
+          "customCss": ":root {\n\t--font-family: 'Open Sans', sans-serif;\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\t--font-size-body: 12px;\n\t--font-size-label: 14px;\n\t--font-size-test-notice: 12px;\n\t--font-size-input: 14px;\n\t--font-size-header: 20px;\n\t--font-size-paragraph: 14px;\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\t--font-size-html-h1: 28px;\n\t--font-size-html-h2: 20px;\n\t--font-size-html-h3: 16px;\n\t--font-size-html-h4: 14px;\n\t--font-size-html-h5: 12px;\n\t--font-size-html-h6: 10px;\n\t--font-size-subheader: 14px;\n\n\t/* Colors */\n\t--color-background: #fbfcfe;\n\t--color-test-notice-text: #e6a23d;\n\t--color-test-notice-bg: #fefaf6;\n\t--color-test-notice-border: #f6dcb7;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #dbdfe7;\n\t--color-card-shadow: rgba(99, 77, 255, 0.06);\n\t--color-link: #7e8186;\n\t--color-header: #525356;\n\t--color-label: #555555;\n\t--color-input-border: #dbdfe7;\n\t--color-input-text: #71747A;\n\t--color-focus-border: rgb(90, 76, 194);\n\t--color-submit-btn-bg: #ff6d5a;\n\t--color-submit-btn-text: #ffffff;\n\t--color-error: #ea1f30;\n\t--color-required: #ff6d5a;\n\t--color-clear-button-bg: #7e8186;\n\t--color-html-text: #555;\n\t--color-html-link: #ff6d5a;\n\t--color-header-subtext: #7e8186;\n\n\t/* Border Radii */\n\t--border-radius-card: 8px;\n\t--border-radius-input: 6px;\n\t--border-radius-clear-btn: 50%;\n\t--card-border-radius: 8px;\n\n\t/* Spacing */\n\t--padding-container-top: 24px;\n\t--padding-card: 24px;\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\t--margin-bottom-card: 16px;\n\t--padding-form-input: 12px;\n\t--card-padding: 24px;\n\t--card-margin-bottom: 16px;\n\n\t/* Dimensions */\n\t--container-width: 448px;\n\t--submit-btn-height: 48px;\n\t--checkbox-size: 18px;\n\n\t/* Others */\n\t--box-shadow-card: 0px 4px 16px 0px var(--color-card-shadow);\n\t--opacity-placeholder: 0.5;\n}"
+        }
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        -800,
+        -144
+      ],
+      "id": "1b8c885d-0cc5-4320-9e82-c33dbd75030a",
+      "name": "Form1",
+      "webhookId": "49f285b7-3fa4-4ef5-b945-93b44ec86c82"
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Select function",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Send report per email"
+                  },
+                  {
+                    "option": "Chat with an AI expert"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "formTitle": "Campaign Evaluation Tool [Prototype]",
+          "formDescription": "Choose what you would like to do.",
+          "buttonLabel": "Submit",
+          "customCss": ":root {\n\t--font-family: 'Open Sans', sans-serif;\n\t--font-weight-normal: 400;\n\t--font-weight-bold: 600;\n\t--font-size-body: 12px;\n\t--font-size-label: 14px;\n\t--font-size-test-notice: 12px;\n\t--font-size-input: 14px;\n\t--font-size-header: 20px;\n\t--font-size-paragraph: 14px;\n\t--font-size-link: 12px;\n\t--font-size-error: 12px;\n\t--font-size-html-h1: 28px;\n\t--font-size-html-h2: 20px;\n\t--font-size-html-h3: 16px;\n\t--font-size-html-h4: 14px;\n\t--font-size-html-h5: 12px;\n\t--font-size-html-h6: 10px;\n\t--font-size-subheader: 14px;\n\n\t/* Colors */\n\t--color-background: #fbfcfe;\n\t--color-test-notice-text: #e6a23d;\n\t--color-test-notice-bg: #fefaf6;\n\t--color-test-notice-border: #f6dcb7;\n\t--color-card-bg: #ffffff;\n\t--color-card-border: #dbdfe7;\n\t--color-card-shadow: rgba(99, 77, 255, 0.06);\n\t--color-link: #7e8186;\n\t--color-header: #525356;\n\t--color-label: #555555;\n\t--color-input-border: #dbdfe7;\n\t--color-input-text: #71747A;\n\t--color-focus-border: rgb(90, 76, 194);\n\t--color-submit-btn-bg: #ff6d5a;\n\t--color-submit-btn-text: #ffffff;\n\t--color-error: #ea1f30;\n\t--color-required: #ff6d5a;\n\t--color-clear-button-bg: #7e8186;\n\t--color-html-text: #555;\n\t--color-html-link: #ff6d5a;\n\t--color-header-subtext: #7e8186;\n\n\t/* Border Radii */\n\t--border-radius-card: 8px;\n\t--border-radius-input: 6px;\n\t--border-radius-clear-btn: 50%;\n\t--card-border-radius: 8px;\n\n\t/* Spacing */\n\t--padding-container-top: 24px;\n\t--padding-card: 24px;\n\t--padding-test-notice-vertical: 12px;\n\t--padding-test-notice-horizontal: 24px;\n\t--margin-bottom-card: 16px;\n\t--padding-form-input: 12px;\n\t--card-padding: 24px;\n\t--card-margin-bottom: 16px;\n\n\t/* Dimensions */\n\t--container-width: 448px;\n\t--submit-btn-height: 48px;\n\t--checkbox-size: 18px;\n\n\t/* Others */\n\t--box-shadow-card: 0px 4px 16px 0px var(--color-card-shadow);\n\t--opacity-placeholder: 0.5;\n}"
+        }
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        -432,
+        -144
+      ],
+      "id": "8376360e-3ba3-41fb-a1dd-28bb81972369",
+      "name": "Form4",
+      "webhookId": "49f285b7-3fa4-4ef5-b945-93b44ec86c82"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $node['Form4'].json['Select function'].toString() }}",
+                    "rightValue": "Send report per email",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "ac547cc2-2302-49e3-90bb-6ed8d4a480fe"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Report"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "a9f542cc-efe8-4005-b62a-6fa22467e465",
+                    "leftValue": "={{ $node['Form4'].json['Select function'].toString() }}",
+                    "rightValue": "Chat with an AI expert",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Chat"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        144,
+        -144
+      ],
+      "id": "833b0f3b-ec06-42a4-a88f-3a68d2441564",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "931e91d4-dc87-4e50-8862-4011f3c99062",
+              "name": "Name",
+              "value": "={{ $('Form').item.json.Name }}",
+              "type": "string"
+            },
+            {
+              "id": "ed5e7010-2bc1-4339-9567-64a4f375adc9",
+              "name": "Email",
+              "value": "={{ $('Form').item.json.Email }}",
+              "type": "string"
+            },
+            {
+              "id": "1257b2c4-e6e7-40e5-a42a-2b0df4f4ea82",
+              "name": "Campaign",
+              "value": "={{ $('Form1').item.json.Campaign }}",
+              "type": "string"
+            },
+            {
+              "id": "b6fbe5d7-7e65-4154-b92e-433e197524f8",
+              "name": "Country",
+              "value": "={{ $('Form1').item.json.Country }}",
+              "type": "string"
+            },
+            {
+              "id": "6ec810ea-17ea-4dda-98d0-875a3b5461d5",
+              "name": "Period",
+              "value": "={{ $('Form1').item.json.Period }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -624,
+        -144
+      ],
+      "id": "e7483de7-4249-4426-918a-203be43581c7",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "operation": "select",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "campaign_data",
+          "mode": "list",
+          "cachedResultName": "campaign_data"
+        },
+        "returnAll": true,
+        "where": {
+          "values": [
+            {
+              "column": "month",
+              "value": "={{ $('Form1').item.json.Period }}"
+            },
+            {
+              "column": "country",
+              "value": "={{ $('Form1').item.json.Country }}"
+            },
+            {
+              "column": "campaign_id",
+              "value": "={{ $('Form1').item.json.Campaign }}"
+            }
+          ]
+        },
+        "sort": {
+          "values": [
+            {
+              "column": "transaction_id"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -256,
+        -144
+      ],
+      "id": "4b393488-7dd4-4323-8e5b-8b9d5d50ac81",
+      "name": "Select rows from a table",
+      "credentials": {
+        "postgres": {
+          "id": "umjud1EbuyGa8mwb",
+          "name": "Postgres_Pfizer"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "kaljuste@gmail.com",
+        "subject": "Report",
+        "message": "={{ $json.html }}",
+        "options": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1072,
+        -384
+      ],
+      "id": "feb03f50-4726-4037-90e9-afa8e2166bab",
+      "name": "Send a message",
+      "webhookId": "a370db21-dccc-4acd-98ab-63ec28f786fd",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "VdSB5L3fakWHyKeW",
+          "name": "Gmail_Drive"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "set",
+        "key": "variables:context_pack",
+        "value": "={{ $json.output }}"
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        896,
+        48
+      ],
+      "id": "c4f267f0-1e2e-4bc3-882b-e1c17a8be9b7",
+      "name": "contextPack",
+      "credentials": {
+        "redis": {
+          "id": "CSeIxxv2TIgjF5IT",
+          "name": "Redis_01"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "get",
+        "propertyName": "context_pack",
+        "key": "variables:context_pack",
+        "options": {
+          "dotNotation": false
+        }
+      },
+      "type": "n8n-nodes-base.redis",
+      "typeVersion": 1,
+      "position": [
+        -832,
+        672
+      ],
+      "id": "2011d354-b66c-4d7c-9ba4-d449ec9d6362",
+      "name": "contextPack1",
+      "credentials": {
+        "redis": {
+          "id": "CSeIxxv2TIgjF5IT",
+          "name": "Redis_01"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "respondWith": "redirect",
+        "redirectUrl": "https://n8n.rationaleyes.ai/webhook/9b352e5a-06ee-4b59-b43c-dd7a788878f0/chat",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        1072,
+        48
+      ],
+      "id": "7f595dd9-f6e8-4e1d-a722-b34f71a19b4f",
+      "name": "Form2",
+      "webhookId": "dac37249-2bfa-4c51-88fb-0e58e0c6abaf"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Chat Trigger').item.json.chatInput }}\n",
+        "options": {
+          "systemMessage": "=You are “Campaign Insights Chat,” a focused assistant for pharma email/omnichannel analytics.\n\nBEGIN_CONTEXT_JSON\n{{ JSON.stringify($node['ContextNormalization'].json.context_pack || {}) }}\nEND_CONTEXT_JSON\n\nCONTEXT HANDLING\n- Parse the JSON between BEGIN/END into a variable CP. If it’s a string, JSON-parse it. Do NOT echo CP.\n- Use ONLY numbers from CP. You may do light arithmetic (percentage points, relative lift) but never invent data beyond CP.\n\nGREETING (FIRST REPLY ONLY)\n- Trigger when the user greets or sends an empty/opening message.\n- Greet with: “Hi ” + CP.header.marketer_name (fallback “there”) + “—”\n- Then print a 4–5 line scope header (no metrics):\n  Campaign: <CP.header.campaign_id>\n  Period: <CP.header.period_label>\n  Countries: <unique CP.header.filters.country, comma-separated>  (omit if already obvious in Period)\n  Specialties: <CP.header.filters.specialty, comma-separated>      (omit if empty)\n  Channels: <CP.header.filters.channel, comma-separated>           (omit if empty)\n- After the header: one sentence — “I’m ready to discuss your campaign dashboard and provide actionable insights.”\n- Do NOT show metrics in the greeting.\n\nSCOPE (STRICT)\n- Only answer about analytics in CP: overall KPIs, send timing, messages/creatives, specialties, channels, weekly trends, and mix.\n- If asked outside this scope: “I’m focused on your campaign analytics. I can help with KPIs, timing, messages, specialty/channel differences, or weekly trends from your report.”\n\nFORMATTING\n- Percentages: 1 decimal place (e.g., 18.7%). Counts: thousands separators. Per-1k: 0 decimals unless asked.\n- Replies are 1–5 sentences or a tight list. No code fences, emojis, or self-references.\n\nUNDERSTAND USER PHRASES (NO EXTERNAL ROUTER)\n- Map common phrasings to CP sections:\n  • “main numbers / KPIs / topline / overview / summary” → CP.overall\n  • “best/worst time/slot/window, send times” → CP.timing.top_slots / CP.timing.worst_slots (mention CP.timing.note if present)\n  • “messages / creative / RTE / M1 / M2 / M3 / efficacy / safety / access” → CP.messages.rte and CP.messages.winner\n  • “specialty, cardiologist, neurologist” → CP.breakdowns.by_specialty\n  • “channel, RTE, newsletter, email” → CP.breakdowns.by_channel\n  • “trend, week” → CP.trend.by_week (if absent, say trend data isn’t available)\n- If ambiguous, default to a concise overall KPI answer and ask one clarifying question.\n\nMESSAGE ID & ALIAS LOGIC (IMPORTANT)\n- Treat each CP.messages.rte[i].message_id as the canonical label (e.g., “M1”, “M1_Efficacy”, “M2-Safety”, “Access”).\n- For matching user requests, use case-insensitive contains/starts-with on:\n  (a) the full canonical label, and\n  (b) its tokens split by “_”, “-”, or space.\n  Examples: “M1_Efficacy” matches “M1”, “efficacy”; “M3-Access” matches “M3”, “access”.\n- When presenting results, show the canonical label exactly as in CP (don’t re-map to M1/M2/M3 if suffixes exist).\n\nSTANDARD ANSWER SHAPES\n- Overall KPIs (compact, no commentary unless asked):\n  Delivered: CP.overall.delivered (Sends: CP.overall.sends; Delivery rate: CP.overall.delivery_rate as %)\n  Open rate: CP.overall.open_rate as %\n  Click rate: CP.overall.click_rate as %\n  CTR (click-to-open): CP.overall.ctr as %\n  Unsub rate: CP.overall.unsub_rate as %\n  Clicks per 1k: CP.overall.clicks_per_1k\n- Timing: up to 3 best and 3 worst rows — day, window, delivered, click %, open %, CTR %; cite CP.timing.note if present.\n- Messages: rank CP.messages.rte by click_rate; state CP.messages.winner; include Δ vs best in percentage points (pp).\n- Specialty / Channel: compare with delivered, open %, click %, CTR %, unsub % (and clicks/1k for specialty).\n- Trend: list week, delivered, open %, click %, CTR %, unsub %; only compute deltas if asked and inputs exist.\n\nMISSING DATA\n- If an exact slice isn’t available (e.g., “Safety click rate for cardiologists”), say “Not available at that exact slice; here’s the closest available,” then provide the nearest aggregate (e.g., the ‘Safety’ message overall; cardiologist overall on RTE).\n\nSTYLE\n- Helpful, direct, numeric — every claim includes at least one number from CP.\n- Keep under ~80 words unless the user asks for more detail.\n\nCOMPLIANCE\n- Aggregated, anonymized reporting only; do not imply HCP-identifiable data.\n- No medical advice or off-label content.\n\n–––––––––––– INTERNAL CHEAT SHEET (DO NOT OUTPUT) ––––––––––––\nKPI GLOSSARY (email/HCP)\n- Delivered = Sends − bounces; Delivery rate = Delivered / Sends.\n- Open rate = Opens / Delivered; Click rate = Clicks / Delivered.\n- CTR (a.k.a. CTO) = Clicks / Opens; Unsub rate = Unsubs / Delivered.\n- Clicks per 1k delivered = 1000 × click_rate.\n\nINTERPRETATION HEURISTICS\n- Timing: Rank by click rate; open rate as tie-breaker; exclude low-N using CP.thresholds.\n- Creative: If a message trails the top by ≥2.0 pp click rate with meaningful volume, down-weight or iterate. Within ~1.0 pp → roughly comparable.\n- Specialty/Channel: High CTR but lower click rate → post-open friction (CTA/landing). Low opens + low clicks → audience or subject line issue.\n- Trend: Be cautious with small or atypical weeks.\n\nTHEME PILLARS (for message labels like M1_Efficacy / M2_Safety / M3_Access)\n- Efficacy / Clinical impact • Safety / Tolerability • Access / Coverage • Convenience / Workflow • Education / MOA.\n- Use the canonical label from CP; match user queries on tokens like “efficacy”, “safety”, “access”, etc.\n(End Cheat Sheet)"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        -144,
+        608
+      ],
+      "id": "84b67bb8-0da7-4387-a8ec-20495a260f6a",
+      "name": "Chat Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('Chat Trigger').item.json.sessionId }}",
+        "contextWindowLength": 7
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -112,
+        832
+      ],
+      "id": "9eed09b0-2fff-412a-b80f-18d17fa4f9fe",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        -1200,
+        672
+      ],
+      "id": "80df790f-8d53-4a4e-bd56-8e4d9e0ab43c",
+      "name": "Chat Trigger",
+      "webhookId": "9b352e5a-06ee-4b59-b43c-dd7a788878f0"
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.toolCalculator",
+      "typeVersion": 1,
+      "position": [
+        112,
+        832
+      ],
+      "id": "034cece4-9e73-443b-b678-ab136dad3fe7",
+      "name": "Calculator"
+    },
+    {
+      "parameters": {
+        "operation": "completion",
+        "completionTitle": "Campaign Evaluation Tool [Prototype]",
+        "completionMessage": "You will receive a report with recommendations per email.\nThis can take up to 1-2 min.\n\n[the sender will be tamas.kaljuste@e-maxx.org]",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 1,
+      "position": [
+        416,
+        -384
+      ],
+      "id": "8849aa44-db36-4a85-b067-4e4f8cc8617c",
+      "name": "Form3",
+      "webhookId": "bbb08871-427a-47f9-89dd-8fd9bc697af4"
+    },
+    {
+      "parameters": {
+        "jsCode": "/**\n * Marketing KPI Aggregator (n8n Function)\n *\n * WHAT THIS DOES (for non-technical reviewers)\n * ---------------------------------------------------------\n * This node turns raw email-campaign rows (daily totals) into a tidy set of\n * business-friendly summaries for a monthly report and chat assistant:\n *\n * - Overall performance: one roll-up line so leaders can see the \"headline\" KPIs.\n * - Send timing analysis: which weekday + time-window performed best/worst,\n *   so marketers can choose better delivery slots next month.\n * - Message effectiveness (RTE): compares creative variants M1/M2/M3 to decide\n *   which content to keep, scale, or pause.\n * - Audience & channel view: how Cardiologists vs Neurologists respond and how\n *   RTE vs Newsletter compare—useful for targeting and budget allocation.\n * - Mix shares: what % of total sends went to each channel, audience, or message;\n *   this prevents misleading rate comparisons by showing actual volume behind them.\n * - Weekly trend: a quick week-1..week-5 view to spot early spikes or fatigue.\n *\n * We also attach “data sufficiency” flags so rankings ignore very small samples.\n * This avoids over-reacting to tiny volumes that are statistically noisy.\n *\n * INPUT  (items[].json each row):\n *   month, event_date, send_window, campaign_id,\n *   specialty (\"cardiologist\"|\"neurologist\"),\n *   channel (\"RTE\"|\"newsletter\"),\n *   message_id (e.g., \"M1\",\"M2\",\"M3\",\"NL4312\"),\n *   country (\"Austria\"|\"Switzerland\" ...),\n *   day_of_week (1..5),\n *   sends, delivered, opens, clicks, unsubs (integers)\n *\n * OUTPUT (single item consumed by the LLM/email/chat step):\n * {\n *   meta: {...},                  // high-level context & thresholds\n *   overall: {...},               // headline KPIs for the filtered slice\n *   by_slot: [...],               // weekday × window KPIs (+ sufficiency flags)\n *   top_slots: [...],             // best 3 timing slots (enough sample size)\n *   worst_slots: [...],           // worst 3 timing slots (enough sample size)\n *   rte_messages: [...],          // M1/M2/M3: KPIs + deltas vs best + share of RTE volume\n *   by_specialty: [...],          // Cardiologist vs Neurologist KPIs\n *   by_specialty_channel: [...],  // Same split but per channel\n *   by_channel: [...],            // RTE vs Newsletter KPIs\n *   mix: {                        // “what we actually sent” context (shares)\n *     by_channel: [...],\n *     by_specialty: [...],\n *     rte_message_mix: [...]      // message split inside RTE only\n *   },\n *   trend: {\n *     by_week: [...]              // week-of-month movement (fatigue/learning)\n *   }\n * }\n */\n\n// -------------------------------\n// 1) Utilities & constants\n// -------------------------------\n\n/**\n * Why we set a minimum “delivered” to rank timing slots:\n * ------------------------------------------------------\n * Tiny samples look exciting but are unreliable. We exclude slots below this\n * cutoff from best/worst lists so recommendations don’t overfit small numbers.\n */\nconst MIN_DELIVERED_FOR_RANK = 100; // tweak in one place if your org prefers a different floor\n\n/** Human labels for weekday numbers (for nicer tables in the report) */\nconst DOW_LABELS = {1:'Mon', 2:'Tue', 3:'Wed', 4:'Thu', 5:'Fri'};\n\n/** Defensive numeric parsing to avoid NaNs from the source data */\nfunction safeNum(v) { const n = Number(v); return Number.isFinite(n) ? n : 0; }\n\n/** Rate helper: returns 0 if denominator is 0 (prevents divide-by-zero noise) */\nfunction ratio(n, d) { return d > 0 ? (n / d) : 0; }\n\n/**\n * Per-1k helper:\n * --------------\n * “Clicks per 1k delivered” and “Unsubs per 1k delivered” are executive-friendly:\n * they translate rates into round numbers that feel tangible across volumes.\n */\nfunction perThousand(n, d) { return d > 0 ? (1000 * n / d) : 0; }\n\n/**\n * Compute standard KPIs (and extras) from a pre-summed group:\n * - Delivery rate = Delivered / Sends (list quality + deliverability)\n * - Open rate     = Opens / Delivered (subject line + audience fit)\n * - Click rate    = Clicks / Delivered (end-to-end effectiveness)\n * - CTR (CTO)     = Clicks / Opens (message relevance after opening)\n * - Unsub rate    = Unsubs / Delivered (fatigue/risk guardrail)\n * - Per-1k metrics help execs compare across different base sizes\n */\nfunction computeKpis(agg) {\n  const sends     = safeNum(agg.sends);\n  const delivered = safeNum(agg.delivered);\n  const opens     = safeNum(agg.opens);\n  const clicks    = safeNum(agg.clicks);\n  const unsubs    = safeNum(agg.unsubs);\n\n  const delivery_rate   = ratio(delivered, sends);\n  const open_rate       = ratio(opens, delivered);\n  const click_rate      = ratio(clicks, delivered);\n  const ctr             = ratio(clicks, opens);\n  const unsub_rate      = ratio(unsubs, delivered);\n\n  const clicks_per_1k   = perThousand(clicks, delivered);\n  const unsubs_per_1k   = perThousand(unsubs, delivered);\n\n  return {\n    sends, delivered, opens, clicks, unsubs,\n    delivery_rate, open_rate, click_rate, ctr, unsub_rate,\n    clicks_per_1k, unsubs_per_1k\n  };\n}\n\n/** Sum aggregator used by groupings */\nfunction addAgg(prev, row) {\n  return {\n    sends:     safeNum(prev.sends)     + safeNum(row.sends),\n    delivered: safeNum(prev.delivered) + safeNum(row.delivered),\n    opens:     safeNum(prev.opens)     + safeNum(row.opens),\n    clicks:    safeNum(prev.clicks)    + safeNum(row.clicks),\n    unsubs:    safeNum(prev.unsubs)    + safeNum(row.unsubs),\n  };\n}\n\n/**\n * Generic “group by”:\n * We roll the granular rows up to the views marketers actually use to decide\n * timing, targeting, and creative. Each group keeps a simple sum of KPIs.\n */\nfunction groupBy(rows, keyFn) {\n  const m = new Map();\n  for (const r of rows) {\n    const k = keyFn(r);\n    const prev = m.get(k) || { sends:0, delivered:0, opens:0, clicks:0, unsubs:0, __rows:[] };\n    const next = addAgg(prev, r);\n    next.__rows = prev.__rows; next.__rows.push(r);\n    m.set(k, next);\n  }\n  return m;\n}\n\n/**\n * Week-of-month index (1..5):\n * Easy way to see if we front-load or if fatigue creeps in mid-month.\n * Example: 1–7 = week 1, 8–14 = week 2, etc.\n */\nfunction weekIndex(dateISO) {\n  const d = new Date(String(dateISO));\n  const day = d.getUTCDate();\n  return Math.floor((day - 1) / 7) + 1;\n}\n\n// -------------------------------\n// 2) Normalize input rows\n// -------------------------------\n/**\n * We normalize labels and coerce numerics so the rest of the code can assume\n * clean inputs. This prevents case/spacing issues (e.g., \"rte\" vs \"RTE\").\n */\nconst rows = items.map(x => {\n  const j = { ...x.json };\n\n  // Standardize channel labels\n  if (typeof j.channel === 'string') {\n    const c = j.channel.trim().toLowerCase();\n    j.channel = (c === 'rte') ? 'RTE' : (c === 'newsletter' ? 'newsletter' : j.channel);\n  }\n\n  // Force key numeric fields to numbers\n  j.sends     = safeNum(j.sends);\n  j.delivered = safeNum(j.delivered);\n  j.opens     = safeNum(j.opens);\n  j.clicks    = safeNum(j.clicks);\n  j.unsubs    = safeNum(j.unsubs);\n\n  return j;\n});\n\n// -------------------------------\n// 3) Overall KPIs (headline view)\n// -------------------------------\n/**\n * This is the “one glance” card for managers:\n * - Are we reaching people (delivered)?\n * - Are they engaging (open/click)?\n * - Any risk signals (unsub rate)?\n */\nconst overallAgg = rows.reduce(addAgg, { sends:0, delivered:0, opens:0, clicks:0, unsubs:0 });\nconst overall = computeKpis(overallAgg);\n\n// -------------------------------\n// 4) Send timing analysis (weekday × time window)\n// -------------------------------\n/**\n * Why this matters:\n * Timing is a common “free” lever—no budget needed. If a slot (e.g., Tue 10:00)\n * outperforms consistently, we prioritize it. We also mark low-sample slots so\n * we don’t chase noise.\n */\nconst bySlot = [];\nfor (const [key, agg] of groupBy(rows, r => `${r.day_of_week}||${r.send_window}`).entries()) {\n  const [dStr, win] = key.split('||');\n  const d = Number(dStr);\n  const kpi = computeKpis(agg);\n  bySlot.push({\n    day_of_week: d,\n    day_label: DOW_LABELS[d] || String(d),\n    send_window: win,\n    sufficient_data: (kpi.delivered >= MIN_DELIVERED_FOR_RANK),\n    ...kpi\n  });\n}\n\n// Rank only slots with enough data; sort by Click Rate (then Open Rate)\nconst rankableSlots = bySlot.filter(x => x.sufficient_data);\nrankableSlots.sort((a,b) => (b.click_rate - a.click_rate) || (b.open_rate - a.open_rate));\nconst topSlots = rankableSlots.slice(0, 3);\nconst worstSlots = [...rankableSlots].reverse().slice(0, 3);\n\n// -------------------------------\n// 5) RTE message effectiveness (creative testing)\n// -------------------------------\n/**\n * Why this matters:\n * Messages (M1/M2/M3) reflect different subject lines or content angles.\n * We compare them using Click Rate (primary) and Open Rate (secondary)\n * to recommend which creative to scale or pause.\n */\nconst rteRows = rows.filter(r => r.channel === 'RTE' && /^M\\d+/i.test(String(r.message_id)));\nconst rte_messages = [];\nif (rteRows.length) {\n  // Within-RTE mix helps prevent “winner’s curse” on tiny volume.\n  const rteTotalSends = rteRows.reduce((s,r) => s + safeNum(r.sends), 0);\n\n  const msgMap = groupBy(rteRows, r => String(r.message_id).toUpperCase());\n  for (const [msg, agg] of msgMap.entries()) {\n    const kpi = computeKpis(agg);\n    rte_messages.push({\n      message_id: msg,\n      share_of_rte_sends: rteTotalSends > 0 ? (kpi.sends / rteTotalSends) : 0,\n      ...kpi\n    });\n  }\n  // Best-to-worst by Click Rate, ties broken by Open Rate\n  rte_messages.sort((a,b) => (b.click_rate - a.click_rate) || (b.open_rate - a.open_rate));\n  // Delta vs best (signed percentage points) for clear “how far behind”\n  const best = rte_messages[0];\n  if (best) {\n    for (const m of rte_messages) {\n      m.delta_click_rate_pts = (m.click_rate - best.click_rate) * 100;\n      m.delta_open_rate_pts  = (m.open_rate  - best.open_rate ) * 100;\n    }\n  }\n}\n\n// -------------------------------\n// 6) Specialty & channel breakdown (targeting & budget)\n// -------------------------------\n/**\n * Why this matters:\n * Different audiences and channels behave differently. This split helps a manager\n * decide where to focus next (e.g., RTE for Neurologists).\n */\nconst by_specialty = [];\nfor (const [spec, agg] of groupBy(rows, r => String(r.specialty)).entries()) {\n  by_specialty.push({ specialty: spec, ...computeKpis(agg) });\n}\n\nconst by_specialty_channel = [];\nfor (const [key, agg] of groupBy(rows, r => `${r.specialty}||${r.channel}`).entries()) {\n  const [specialty, channel] = key.split('||');\n  by_specialty_channel.push({ specialty, channel, ...computeKpis(agg) });\n}\n\nconst by_channel = [];\nfor (const [ch, agg] of groupBy(rows, r => String(r.channel)).entries()) {\n  by_channel.push({ channel: ch, ...computeKpis(agg) });\n}\n\n// -------------------------------\n// 7) Mix shares (what we actually sent)\n// -------------------------------\n/**\n * Why this matters:\n * Rates alone can mislead if one group has very little volume. Mix tables show\n * how the month’s sends were distributed across channels, audiences, and messages.\n */\nconst totalSends = overall.sends || 0;\n\nconst mix_by_channel = by_channel.map(r => ({\n  channel: r.channel,\n  sends: r.sends,\n  share_of_sends: totalSends > 0 ? (r.sends / totalSends) : 0\n}));\n\nconst mix_by_specialty = by_specialty.map(r => ({\n  specialty: r.specialty,\n  sends: r.sends,\n  share_of_sends: totalSends > 0 ? (r.sends / totalSends) : 0\n}));\n\nconst mix_rte_messages = (() => {\n  const out = [];\n  const onlyRteMsgs = rte_messages.filter(x => /^M\\d+/.test(x.message_id));\n  const rteSendTotal = onlyRteMsgs.reduce((s,m) => s + safeNum(m.sends), 0);\n  for (const m of onlyRteMsgs) {\n    out.push({\n      message_id: m.message_id,\n      sends: m.sends,\n      share_within_rte: rteSendTotal > 0 ? (m.sends / rteSendTotal) : 0\n    });\n  }\n  out.sort((a,b)=> (b.share_within_rte - a.share_within_rte));\n  return out;\n})();\n\n// -------------------------------\n// 8) Week-of-month trend (fatigue/learning)\n// -------------------------------\n/**\n * Why this matters:\n * Campaigns often launch heavy in week 1, then settle. This quick split can reveal\n * fatigue (declining opens/clicks) or improvements (better later weeks).\n */\nconst by_week_map = groupBy(\n  rows.map(r => ({...r, __week: weekIndex(r.event_date)})),\n  r => String(r.__week)\n);\nconst trend_by_week = [];\nfor (const [wk, agg] of by_week_map.entries()) {\n  trend_by_week.push({\n    week_index: Number(wk), // 1..5\n    ...computeKpis(agg)\n  });\n}\ntrend_by_week.sort((a,b)=> a.week_index - b.week_index);\n\n// -------------------------------\n// 9) Meta/context for traceability\n// -------------------------------\n/**\n * Meta includes what markets/months/audiences the slice covers and the\n * sufficiency threshold we used for rankings—so the email can disclose it.\n */\nconst meta = {\n  rows_in: rows.length,\n  countries: [...new Set(rows.map(r => r.country))],\n  months:    [...new Set(rows.map(r => r.month))],\n  specialties: [...new Set(rows.map(r => r.specialty))],\n  channels:  [...new Set(rows.map(r => r.channel))],\n  campaign_ids: [...new Set(rows.map(r => r.campaign_id))],\n  thresholds: {\n    min_delivered_for_ranking: MIN_DELIVERED_FOR_RANK\n  }\n};\n\n// -------------------------------\n// 10) Emit single structured JSON\n// -------------------------------\nreturn [{\n  json: {\n    meta,\n    overall,\n    by_slot: bySlot,\n    top_slots: topSlots,\n    worst_slots: worstSlots,\n    rte_messages,\n    by_specialty,\n    by_specialty_channel,\n    by_channel,\n    mix: {\n      by_channel: mix_by_channel,\n      by_specialty: mix_by_specialty,\n      rte_message_mix: mix_rte_messages\n    },\n    trend: {\n      by_week: trend_by_week\n    }\n  }\n}];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        -144
+      ],
+      "id": "ccb3c9ab-d44d-4d59-a968-36c56c1412b6",
+      "name": "ReportAggregation"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get the model output (adjust if your field name is different)\nlet raw = $json.output || $json.text || $json;\n\n// Make sure it's a string\nraw = String(raw);\n\n// Strip leading/trailing Markdown fences if they exist\nraw = raw.replace(/^```[a-zA-Z]*\\n?/, \"\").replace(/```$/, \"\");\n\n// Return cleaned HTML string\nreturn [{ json: { html: raw } }];\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        896,
+        -384
+      ],
+      "id": "067519da-7c11-4e5b-8d15-668edd2d5178",
+      "name": "OutputNormalization"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Input: { context_pack: \"<potentially truncated JSON string>\" }\n// Output: { context_pack: <parsed object> }\n\nlet s = $json.context_pack;\n\nif (s == null) {\n  throw new Error(\"Missing `context_pack` in input item.\");\n}\n\n// If already an object, pass through\nif (typeof s === 'object') {\n  return [{ json: { context_pack: s } }];\n}\n\nif (typeof s !== 'string') {\n  throw new Error(\"`context_pack` must be a JSON string or object.\");\n}\n\n// Clean up the string\ns = s.trim();\nif (s.startsWith('```')) {\n  s = s.replace(/^```[a-zA-Z-]*\\n?/, '').replace(/```$/, '').trim();\n}\n\nfunction findLastCompleteStructure(str) {\n  console.log(`Analyzing string of length: ${str.length}`);\n  console.log(`Last 200 chars: \"${str.slice(-200)}\"`);\n  \n  // Find all complete field endings (after closing quotes, after numbers, after booleans)\n  let safePositions = [];\n  let inString = false;\n  let escaped = false;\n  let braceDepth = 0;\n  let bracketDepth = 0;\n  \n  for (let i = 0; i < str.length; i++) {\n    const char = str[i];\n    \n    if (escaped) {\n      escaped = false;\n      continue;\n    }\n    \n    if (char === '\\\\' && inString) {\n      escaped = true;\n      continue;\n    }\n    \n    if (char === '\"') {\n      inString = !inString;\n      if (!inString) {\n        // Just closed a string - this could be a safe position\n        safePositions.push(i + 1);\n      }\n      continue;\n    }\n    \n    if (inString) continue;\n    \n    switch (char) {\n      case '{':\n        braceDepth++;\n        break;\n      case '}':\n        braceDepth--;\n        safePositions.push(i + 1);\n        break;\n      case '[':\n        bracketDepth++;\n        break;\n      case ']':\n        bracketDepth--;\n        safePositions.push(i + 1);\n        break;\n      case ',':\n        if (braceDepth > 0 || bracketDepth > 0) {\n          safePositions.push(i);\n        }\n        break;\n    }\n  }\n  \n  console.log(`Found ${safePositions.length} potential safe positions`);\n  \n  // Try safe positions from the end backwards\n  for (let i = safePositions.length - 1; i >= 0; i--) {\n    let pos = safePositions[i];\n    let candidate = str.substring(0, pos);\n    \n    // Skip if too short to be meaningful\n    if (candidate.length < 100) continue;\n    \n    // Count open/close structures in candidate\n    let openBraces = (candidate.match(/\\{/g) || []).length;\n    let closeBraces = (candidate.match(/\\}/g) || []).length;\n    let openBrackets = (candidate.match(/\\[/g) || []).length;\n    let closeBrackets = (candidate.match(/\\]/g) || []).length;\n    \n    // Add missing closing braces/brackets\n    let testStr = candidate;\n    testStr += '}'.repeat(Math.max(0, openBraces - closeBraces));\n    testStr += ']'.repeat(Math.max(0, openBrackets - closeBrackets));\n    \n    console.log(`Trying position ${pos} (${candidate.length} chars)`);\n    \n    try {\n      let parsed = JSON.parse(testStr);\n      if (typeof parsed === 'object' && parsed !== null) {\n        console.log(`Success at position ${pos}!`);\n        return parsed;\n      }\n    } catch (e) {\n      // Continue to next position\n    }\n  }\n  \n  // If all else fails, try to find just the header and overall sections\n  let headerMatch = str.match(/\\{\"header\":\\{[^}]*\\}.*?\"overall\":\\{[^}]*\\}/);\n  if (headerMatch) {\n    try {\n      let minimal = headerMatch[0] + '}';\n      let parsed = JSON.parse(minimal);\n      console.log(\"Recovered minimal structure with header and overall\");\n      return parsed;\n    } catch (e) {\n      // Even minimal recovery failed\n    }\n  }\n  \n  throw new Error(\"Could not find any valid JSON structure\");\n}\n\n// Attempt to parse\nlet pack;\ntry {\n  pack = JSON.parse(s);\n  console.log(\"JSON parsed successfully on first attempt\");\n} catch (err) {\n  console.log(`Initial parse failed: ${err.message}`);\n  \n  // Try aggressive truncation\n  try {\n    pack = findLastCompleteStructure(s);\n    console.log(\"Successfully recovered partial JSON structure\");\n  } catch (recoveryErr) {\n    // Last resort: return a minimal fallback structure\n    console.log(\"All recovery attempts failed, creating fallback structure\");\n    pack = {\n      header: {\n        report_name: \"Recovered Report\",\n        error: \"Original data was truncated\"\n      },\n      overall: {\n        sends: 0,\n        delivered: 0,\n        error: \"Data recovery failed - partial information may be missing\"\n      },\n      recovery_info: {\n        original_length: s.length,\n        error: err.message,\n        recovery_error: recoveryErr.message\n      }\n    };\n  }\n}\n\n// Always return something useful\nif (typeof pack !== 'object' || pack === null) {\n  pack = { error: \"Invalid data structure\", raw_length: s.length };\n}\n\nconsole.log(\"Final structure keys:\", Object.keys(pack));\n\nreturn [{ json: { context_pack: pack } }];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -656,
+        672
+      ],
+      "id": "6cae0b11-b61c-4418-a01f-3daa7361ebef",
+      "name": "ContextNormalization"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=={{ JSON.stringify({\n  header: {\n    report_name: \"Monthly Campaign Insights\",\n    marketer_name: $node[\"Form\"].json.Name,\n    brand: \"Vydura\",\n    campaign_id: $node[\"Form1\"].json.Campaign,\n    // Show the chosen month + country in a readable label\n    period_label: `${$node[\"Form1\"].json.Period} — ${$node[\"Form1\"].json.Country}`,\n    // ISO YYYY-MM-DD\n    report_date: $now.toISO().slice(0,10),\n    timezone: \"Europe/Zurich\",\n    // Structured filters the model (and future automations) can rely on\n    filters: {\n      country: [$node[\"Form1\"].json.Country],\n      month:   [$node[\"Form1\"].json.Period],\n      // Take specialties/channels from the analysis meta so they always match the data slice\n      specialty: ($json.meta && $json.meta.specialties) ? $json.meta.specialties : [],\n      channel:   ($json.meta && $json.meta.channels)    ? $json.meta.channels    : []\n    }\n  },\n  thresholds: { min_delivered_for_ranking: 100 },\n  // The ENTIRE JSON output from the \"Code\" node is the current $json here\n  analysis: $json\n}) }}\n\n",
+        "options": {
+          "systemMessage": "You are “Marketing Insights Writer,” a precise analytics copywriter for pharmaceutical campaigns.\n\nHARD RULES\n- OUTPUT RAW HTML ONLY. No Markdown/code fences/backticks (no ```html).\n- Use ONLY numbers in the provided JSON. Do not invent totals or recompute beyond formatting.\n- Formatting:\n  • Percentages: 1 decimal place (e.g., 23.4%).\n  • Per-1k metrics: 0 decimals (e.g., 127 per 1k).\n  • Counts: integers with thousands separators.\n- Data sufficiency: if delivered < thresholds.min_delivered_for_ranking, show “(insufficient data)” and exclude from best/worst rankings.\n- Be concise, executive-friendly, and action-oriented. Avoid hype.\n- Maintain the EXACT section order and HTML structure below.\n\nHTML OUTPUT CONTRACT\nReturn a COMPLETE, self-contained HTML document (no external assets):\n\n<!doctype html>\n<html><head>\n<meta charset=\"utf-8\">\n<title>{{report_name}}</title>\n<style>\n  body { font-family:-apple-system, Segoe UI, Roboto, Arial, sans-serif; color:#111; }\n  .wrap { max-width: 920px; margin: 0 auto; padding: 24px; }\n  h1 { font-size: 22px; margin: 0 0 8px; }\n  h2 { font-size: 16px; margin: 24px 0 8px; }\n  p  { margin: 8px 0; }\n  .meta { background:#f6f7f8; padding:12px; border-radius:8px; }\n  table { width:100%; border-collapse: collapse; margin: 8px 0 16px; }\n  th, td { padding: 8px; border-bottom: 1px solid #eee; text-align: left; font-size: 13px; }\n  .kpi { display:flex; flex-wrap:wrap; gap:12px; }\n  .kpi .card { flex:1 1 180px; background:#fafbfc; border:1px solid #eee; border-radius:8px; padding:12px; }\n  .small { color:#555; font-size:12px; }\n  ul { margin: 8px 0 8px 18px; }\n  .footer { color:#666; font-size:12px; margin-top: 16px; }\n</style>\n</head><body><div class=\"wrap\">\n\n<!-- HEADER -->\n<h1>{{report_name}}</h1>\n<div class=\"meta\">\n  <div><strong>Marketer:</strong> {{marketer_name}}</div>\n  <div><strong>Campaign:</strong> {{campaign_id}}</div>\n  <div><strong>Period:</strong> {{period_label}}</div>\n  <div><strong>Date of report:</strong> {{report_date}}</div>\n  <div class=\"small\">Ranking threshold: delivered ≥ {{thresholds.min_delivered_for_ranking}}</div>\n</div>\n\n<!-- SECTION A: OVERVIEW (at the top) -->\n<h2>Overview</h2>\n<div class=\"kpi\">\n  <div class=\"card\"><strong>Delivered</strong><div>{{overall.delivered}}</div><div class=\"small\">Sends: {{overall.sends}}</div></div>\n  <div class=\"card\"><strong>Delivery rate</strong><div>{{pct overall.delivery_rate}}</div></div>\n  <div class=\"card\"><strong>Open rate</strong><div>{{pct overall.open_rate}}</div></div>\n  <div class=\"card\"><strong>Click rate</strong><div>{{pct overall.click_rate}}</div></div>\n  <div class=\"card\"><strong>Click-to-open (CTR)</strong><div>{{pct overall.ctr}}</div></div>\n  <div class=\"card\"><strong>Unsub rate</strong><div>{{pct overall.unsub_rate}}</div></div>\n  <div class=\"card\"><strong>Clicks per 1k delivered</strong><div>{{int overall.clicks_per_1k}}</div></div>\n  <div class=\"card\"><strong>Unsubs per 1k delivered</strong><div>{{int overall.unsubs_per_1k}}</div></div>\n</div>\n\n<!-- SECTION B: ACTIONABLE INSIGHTS (renamed) -->\n<h2>Actionable Insights</h2>\n<ul>\n  <!-- Provide 4–6 tight bullets total -->\n  <!-- 1–2 bullets on timing (best vs worst windows; mention low-N exclusions if relevant) -->\n  <!-- 1–2 bullets on creative (which message to scale/pause and why, include pp deltas) -->\n  <!-- 1 bullet on audience/channel differences (targeting & budget) -->\n  <!-- 0–1 bullet on risk/guardrails (unsubscribe spikes, delivery issues) -->\n</ul>\n\n<!-- SECTION C: Send Timing — Best & Worst Slots -->\n<h2>Send Timing — Best & Worst Slots</h2>\n<table>\n  <thead><tr><th>Top Rank</th><th>Day</th><th>Window</th><th>Delivered</th><th>Open %</th><th>Click %</th><th>CTR %</th></tr></thead>\n  <tbody>\n    {{#each top_slots}}\n    <tr><td>{{inc @index}}</td><td>{{this.day_label}}</td><td>{{this.send_window}}</td><td>{{fmt this.delivered}}</td><td>{{pct this.open_rate}}</td><td>{{pct this.click_rate}}</td><td>{{pct this.ctr}}</td></tr>\n    {{/each}}\n  </tbody>\n</table>\n\n<table>\n  <thead><tr><th>Low Rank</th><th>Day</th><th>Window</th><th>Delivered</th><th>Open %</th><th>Click %</th><th>CTR %</th></tr></thead>\n  <tbody>\n    {{#each worst_slots}}\n    <tr><td>{{inc @index}}</td><td>{{this.day_label}}</td><td>{{this.send_window}}</td><td>{{fmt this.delivered}}</td><td>{{pct this.open_rate}}</td><td>{{pct this.click_rate}}</td><td>{{pct this.ctr}}</td></tr>\n    {{/each}}\n  </tbody>\n</table>\n<p class=\"small\">Slots with delivered &lt; {{thresholds.min_delivered_for_ranking}} are excluded from rankings.</p>\n\n<!-- SECTION D: RTE Messages (M1/M2/M3) -->\n<h2>RTE Messages (M1/M2/M3)</h2>\n<table>\n  <thead><tr><th>Message</th><th>Share of RTE sends</th><th>Delivered</th><th>Open %</th><th>Click %</th><th>CTR %</th><th>Δ Click % vs Best</th></tr></thead>\n  <tbody>\n    {{#each rte_messages}}\n    <tr>\n      <td>{{this.message_id}}</td>\n      <td>{{pct this.share_of_rte_sends}}</td>\n      <td>{{fmt this.delivered}}</td>\n      <td>{{pct this.open_rate}}</td>\n      <td>{{pct this.click_rate}}</td>\n      <td>{{pct this.ctr}}</td>\n      <td>{{pt this.delta_click_rate_pts}}</td>\n    </tr>\n    {{/each}}\n  </tbody>\n</table>\n\n<!-- SECTION E: Specialty & Channel Breakdown -->\n<h2>Specialty Comparison</h2>\n<table>\n  <thead><tr><th>Specialty</th><th>Delivered</th><th>Open %</th><th>Click %</th><th>CTR %</th><th>Unsub %</th><th>Clicks/1k</th><th>Unsubs/1k</th></tr></thead>\n  <tbody>\n    {{#each by_specialty}}\n    <tr>\n      <td>{{cap this.specialty}}</td><td>{{fmt this.delivered}}</td>\n      <td>{{pct this.open_rate}}</td><td>{{pct this.click_rate}}</td><td>{{pct this.ctr}}</td><td>{{pct this.unsub_rate}}</td>\n      <td>{{int this.clicks_per_1k}}</td><td>{{int this.unsubs_per_1k}}</td>\n    </tr>\n    {{/each}}\n  </tbody>\n</table>\n\n<h2>Channel Summary</h2>\n<table>\n  <thead><tr><th>Channel</th><th>Delivered</th><th>Delivery %</th><th>Open %</th><th>Click %</th><th>CTR %</th><th>Unsub %</th></tr></thead>\n  <tbody>\n    {{#each by_channel}}\n    <tr>\n      <td>{{cap this.channel}}</td><td>{{fmt this.delivered}}</td>\n      <td>{{pct this.delivery_rate}}</td><td>{{pct this.open_rate}}</td><td>{{pct this.click_rate}}</td><td>{{pct this.ctr}}</td><td>{{pct this.unsub_rate}}</td>\n    </tr>\n    {{/each}}\n  </tbody>\n</table>\n\n<!-- SECTION F: Mix of Sends -->\n<h2>Mix of Sends</h2>\n<table>\n  <thead><tr><th>By Channel</th><th>Sends</th><th>Share</th></tr></thead>\n  <tbody>\n    {{#each mix.by_channel}}\n    <tr><td>{{cap this.channel}}</td><td>{{fmt this.sends}}</td><td>{{pct this.share_of_sends}}</td></tr>\n    {{/each}}\n  </tbody>\n</table>\n\n<table>\n  <thead><tr><th>By Specialty</th><th>Sends</th><th>Share</th></tr></thead>\n  <tbody>\n    {{#each mix.by_specialty}}\n    <tr><td>{{cap this.specialty}}</td><td>{{fmt this.sends}}</td><td>{{pct this.share_of_sends}}</td></tr>\n    {{/each}}\n  </tbody>\n</table>\n\n<table>\n  <thead><tr><th>RTE Message Mix</th><th>Sends</th><th>Share within RTE</th></tr></thead>\n  <tbody>\n    {{#each mix.rte_message_mix}}\n    <tr><td>{{this.message_id}}</td><td>{{fmt this.sends}}</td><td>{{pct this.share_within_rte}}</td></tr>\n    {{/each}}\n  </tbody>\n</table>\n\n<!-- SECTION G: Weekly Trend -->\n<h2>Weekly Trend</h2>\n<table>\n  <thead><tr><th>Week</th><th>Delivered</th><th>Open %</th><th>Click %</th><th>CTR %</th><th>Unsub %</th></tr></thead>\n  <tbody>\n    {{#each trend.by_week}}\n    <tr>\n      <td>Week {{this.week_index}}</td>\n      <td>{{fmt this.delivered}}</td>\n      <td>{{pct this.open_rate}}</td>\n      <td>{{pct this.click_rate}}</td>\n      <td>{{pct this.ctr}}</td>\n      <td>{{pct this.unsub_rate}}</td>\n    </tr>\n    {{/each}}\n  </tbody>\n</table>\n\n<div class=\"footer\">\n  Data source: campaign_id {{campaign_id}} • Period: {{period_label}} • Generated: {{report_date}}.<br/>\n  Aggregated data only (no HCP-level information).\n</div>\n\n</div></body></html>\n\n==================== CONSULTING & INDUSTRY STYLE GUIDE (APPENDIX) ====================\nPurpose\n- Use standard marketing analytics language so reports read like they came from a pharma commercial analytics team.\n\nCore KPI definitions (email/HCP context)\n- Delivered = successfully delivered emails (after bounces).\n- Delivery rate = Delivered / Sends.\n- Open rate = Opens / Delivered.\n- Click rate = Clicks / Delivered.\n- CTR (a.k.a. CTO) = Clicks / Opens.\n- Unsub rate = Unsubs / Delivered.\n- Clicks per 1k delivered = clicks / delivered × 1000.\n\nInterpretation guidelines\n- Rank “Best/Worst slots” by Click rate; Open rate breaks ties.\n- Exclude low samples from rankings and note the threshold.\n- Use percentage points (pp) for deltas (e.g., “+2.4 pp”).\n- Don’t overclaim causality; suggest A/B or holdout tests.\n\nMessaging guidance\n- If a creative underperforms ≥10 pp vs best, recommend pausing and reallocating volume.\n- If a timing slot has ≥15% relative lift, recommend standardizing on it.\n- If unsub is elevated, propose frequency caps, suppress non-engagers, and review copy.\n\nStyle & tone\n- “What / So what / Now what”: fact, implication, action.\n- Compliance-aware wording; no HCP-identifiable references.\n\nFormatting helpers (if supported): pct(x), pt(x), fmt(x), int(x), cap(s), inc(i).\n======================================================================================"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        608,
+        -384
+      ],
+      "id": "cae03fba-2253-4955-849f-7f0ffd5bdbd5",
+      "name": "Report Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=={{ JSON.stringify({\n  header: {\n    report_name: \"Monthly Campaign Insights\",\n    marketer_name: $node[\"Form\"].json.Name,\n    brand: \"Vydura\",\n    campaign_id: $node[\"Form1\"].json.Campaign,\n    period_label: `${$node[\"Form1\"].json.Period} — ${$node[\"Form1\"].json.Country}`,\n    report_date: $now.toISO().slice(0,10),\n    timezone: \"Europe/Zurich\",\n    filters: {\n      country: [$node[\"Form1\"].json.Country],\n      month:   [$node[\"Form1\"].json.Period],\n      specialty: $node[\"ReportAggregation\"].json.meta?.specialties || [],\n      channel:   $node[\"ReportAggregation\"].json.meta?.channels    || []\n    }\n  },\n  thresholds: { min_delivered_for_ranking: 100 },\n  analysis: $node[\"ReportAggregation\"].json   // or $node[\"Reduce Analysis\"].json if you added it\n}) }}\n",
+        "options": {
+          "systemMessage": "=You are “Campaign Insights Context Builder,” a background consolidation agent.\nGoal: produce a compact JSON “context pack” for a chat assistant—fast.\n\nLATENCY & SIZE CONSTRAINTS\n- Keep total output < 10 KB and < 800 tokens.\n- Return MINIFIED JSON on a SINGLE LINE (no spaces/newlines).\n- DO NOT echo inputs or add commentary. No HTML/Markdown. JSON only.\n- If needed to meet size: (1) limit trend.by_week to max 4 entries; (2) round rates to 3 decimals; (3) drop mix.rte_message_mix.\n\n- Return MINIFIED JSON on a SINGLE LINE (no spaces/newlines).\n- Do NOT use code fences, preambles, or comments; JSON only.\n\nINPUT SHAPE\n- Preferred: { header, thresholds, analysis } as provided by upstream nodes.\n- If header/thresholds are missing, derive safe placeholders from analysis.meta and today’s date (YYYY-MM-DD).\n- If analysis is missing, return an empty but valid object per the schema with a brief note inside each affected section.\n\nSTRICT OUTPUT SCHEMA (single JSON object, no extra top-level fields)\n{\n  \"header\": {\n    \"report_name\": string,\n    \"marketer_name\": string,\n    \"brand\": string,\n    \"campaign_id\": string,\n    \"period_label\": string,\n    \"report_date\": string,      // YYYY-MM-DD\n    \"timezone\": string,\n    \"filters\": {\n      \"country\": string[], \"month\": string[], \"specialty\": string[], \"channel\": string[]\n    }\n  },\n  \"thresholds\": { \"min_delivered_for_ranking\": number },\n  \"meta\": {\n    \"countries\": string[], \"months\": string[], \"specialties\": string[], \"channels\": string[], \"campaign_ids\": string[]\n  },\n  \"overall\": {\n    \"sends\": number, \"delivered\": number, \"open_rate\": number, \"click_rate\": number,\n    \"ctr\": number, \"unsub_rate\": number, \"delivery_rate\": number, \"clicks_per_1k\": number, \"unsubs_per_1k\": number\n  },\n  \"timing\": {\n    \"top_slots\": [ { \"day_label\": string, \"send_window\": string, \"delivered\": number, \"open_rate\": number, \"click_rate\": number, \"ctr\": number } ],\n    \"worst_slots\": [ { \"day_label\": string, \"send_window\": string, \"delivered\": number, \"open_rate\": number, \"click_rate\": number, \"ctr\": number } ],\n    \"note\": string\n  },\n  \"messages\": {\n    \"rte\": [ { \"message_id\": string, \"share_of_rte_sends\": number, \"delivered\": number, \"open_rate\": number, \"click_rate\": number, \"ctr\": number, \"delta_click_rate_pts\": number } ],\n    \"winner\": string | null\n  },\n  \"breakdowns\": {\n    \"by_specialty\": [ { \"specialty\": string, \"delivered\": number, \"open_rate\": number, \"click_rate\": number, \"ctr\": number, \"unsub_rate\": number, \"clicks_per_1k\": number, \"unsubs_per_1k\": number } ],\n    \"by_channel\":   [ { \"channel\": string, \"delivered\": number, \"delivery_rate\": number, \"open_rate\": number, \"click_rate\": number, \"ctr\": number, \"unsub_rate\": number } ]\n  },\n  \"mix\": {\n    \"by_channel\": [ { \"channel\": string, \"sends\": number, \"share_of_sends\": number } ],\n    \"by_specialty\": [ { \"specialty\": string, \"sends\": number, \"share_of_sends\": number } ],\n    \"rte_message_mix\": [ { \"message_id\": string, \"sends\": number, \"share_within_rte\": number } ]\n  },\n  \"trend\": { \"by_week\": [ { \"week_index\": number, \"delivered\": number, \"open_rate\": number, \"click_rate\": number, \"ctr\": number, \"unsub_rate\": number } ] },\n  \"summaries\": {\n    \"one_liner\": string,\n    \"timing\": string[], \"messages\": string[], \"audience_channel\": string[], \"risk\": string[]\n  }\n}\n\nRULES (speed-focused)\n- Copy numeric fields from analysis; do not recalc beyond sorting and rounding to 3 decimals.\n- timing.top_slots and timing.worst_slots: include up to 3 rows each; exclude any with delivered < thresholds.min_delivered_for_ranking. Set timing.note accordingly.\n- messages.rte: sort by click_rate desc; messages.winner = first item’s message_id or null if empty.\n- Keep summaries as short factual sentences (no bullets/markup).\n- If any section is unavailable, return an empty array/object and include a short \"note\" field inside that section (do NOT add new top-level keys).\n- Output JSON only; no backticks; no preambles; no hidden reasoning."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 2.2,
+      "position": [
+        608,
+        48
+      ],
+      "id": "0d595cab-c58e-4383-932b-15e638d623c9",
+      "name": "Context Agent",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "content": "## User Inputs via Forms\n## ",
+        "height": 544,
+        "width": 976,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1280,
+        -352
+      ],
+      "typeVersion": 1,
+      "id": "010df319-64e1-40e0-b902-70d811ab8f59",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "content": "## SQL Query of dashboard data and report preparation and aggregations by code \n",
+        "height": 544,
+        "width": 368,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -272,
+        -352
+      ],
+      "typeVersion": 1,
+      "id": "93618e3a-b0fa-4d95-9dee-beb39dcd7345",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "content": "## Program Logic Path\n",
+        "height": 544,
+        "width": 208,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        112,
+        -352
+      ],
+      "typeVersion": 1,
+      "id": "c6c118f1-8a2e-41d5-be6b-b85b2363a8e5",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "model": "google/gemini-2.5-pro",
+        "options": {
+          "maxTokens": {},
+          "temperature": 0.3
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        544,
+        -224
+      ],
+      "id": "ee1d5aa1-4615-49ab-a0cd-b562203d0f35",
+      "name": "Gemini 2.5 Pro",
+      "credentials": {
+        "openRouterApi": {
+          "id": "AphW9GZZCiGoSqGB",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "google/gemini-2.5-flash",
+        "options": {
+          "maxTokens": 1200,
+          "responseFormat": "json_object",
+          "temperature": 0.1
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        544,
+        208
+      ],
+      "id": "616cd179-c7e9-4f22-82eb-bae9be1ddd9f",
+      "name": "Gemini 2.5 Flash",
+      "credentials": {
+        "openRouterApi": {
+          "id": "AphW9GZZCiGoSqGB",
+          "name": "OpenRouter account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## Report Creation Agent and Report Sending\n",
+        "height": 400,
+        "width": 944,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        352,
+        -480
+      ],
+      "typeVersion": 1,
+      "id": "aa6427b7-4e8e-4d45-9238-6e318a9e7464",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "## Context Preparation Agent for the Chat Agent\n",
+        "height": 400,
+        "width": 944,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        352,
+        -48
+      ],
+      "typeVersion": 1,
+      "id": "f76b5274-eff6-4e75-a7ba-270051e2faaa",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {
+        "content": "## User Chat Interface\n## ",
+        "height": 544,
+        "width": 336,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -1280,
+        448
+      ],
+      "typeVersion": 1,
+      "id": "e81b17b9-b93d-49f7-8c8f-4be826927abe",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## Context handover and normalization by code\n",
+        "height": 544,
+        "width": 416,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -896,
+        448
+      ],
+      "typeVersion": 1,
+      "id": "41b59600-73cc-4470-8ee9-2c3c24f43a52",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "content": "## Chat Agent using CAG, Chat Memory and Calculator Tool\n",
+        "height": 544,
+        "width": 800,
+        "color": 2
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -448,
+        448
+      ],
+      "typeVersion": 1,
+      "id": "3e1b5847-4328-4a6c-9347-837f7fb9715c",
+      "name": "Sticky Note7"
+    },
+    {
+      "parameters": {
+        "model": "google/gemini-2.5-pro",
+        "options": {
+          "temperature": 0.6
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenRouter",
+      "typeVersion": 1,
+      "position": [
+        -336,
+        832
+      ],
+      "id": "a2880a9d-4944-4cbd-8c02-0d5baca6a4e6",
+      "name": "Gemini 2.5 Pro_",
+      "credentials": {
+        "openRouterApi": {
+          "id": "AphW9GZZCiGoSqGB",
+          "name": "OpenRouter account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form": {
+      "main": [
+        [
+          {
+            "node": "Form1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form1": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form4": {
+      "main": [
+        [
+          {
+            "node": "Select rows from a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Form4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Form3",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Context Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Select rows from a table": {
+      "main": [
+        [
+          {
+            "node": "ReportAggregation",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        []
+      ]
+    },
+    "contextPack1": {
+      "main": [
+        [
+          {
+            "node": "ContextNormalization",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "contextPack": {
+      "main": [
+        [
+          {
+            "node": "Form2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Agent": {
+      "main": [
+        []
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Chat Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Chat Trigger": {
+      "main": [
+        [
+          {
+            "node": "contextPack1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculator": {
+      "ai_tool": [
+        [
+          {
+            "node": "Chat Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Form3": {
+      "main": [
+        [
+          {
+            "node": "Report Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ReportAggregation": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OutputNormalization": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ContextNormalization": {
+      "main": [
+        [
+          {
+            "node": "Chat Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Report Agent": {
+      "main": [
+        [
+          {
+            "node": "OutputNormalization",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Context Agent": {
+      "main": [
+        [
+          {
+            "node": "contextPack",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini 2.5 Pro": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Report Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini 2.5 Flash": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Context Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gemini 2.5 Pro_": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Chat Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "39b2a9b1-da6b-43b0-b77a-11c3b48c50ff",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "5b15476f3290b044e3eaf6be775fab3ecb9a500b7c6f2172e9a7d158b14e45fb"
+  },
+  "id": "xIFKywbXy7vTaqlD",
+  "tags": []
+}
