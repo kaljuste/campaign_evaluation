@@ -3,6 +3,8 @@
 Automatically turn campaign dashboard data into **actionable insights**—delivered as an email report and available via a **chat assistant** for follow-up Q&A.
 
 **Live entry point:** <https://n8n.rationaleyes.ai/form/pfizer_usecase>  
+(enter the same link again if you want to test both evaluation and chat with AI)
+
 **Public repo:** <https://github.com/kaljuste/campaign_evaluation>
 
 ---
